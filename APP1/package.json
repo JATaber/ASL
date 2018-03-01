@@ -1,0 +1,22 @@
+{
+  "name": "app1",
+  "version": "1.0.0",
+  "description": "Hello",
+  "main": "1",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "hello"
+  },
+  "keywords": [
+    "hello",
+    "app"
+  ],
+  "author": "James Taber",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
