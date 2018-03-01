@@ -3,12 +3,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.locals.navitems= [{link:'/', content:'Home'},
-                          {link:'/users', content:'Users'}];
-                          
     res.render('index', {
               title: 'Home',
-              });
+              navitems: [
+              {link: '/', content: 'Home'},
+              {link: '/users', content: 'Users'}
+              ]});
 });
 
 router.get('/users', function(req, res, next) {
