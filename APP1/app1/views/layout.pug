@@ -9,11 +9,11 @@ html
       nav.navbar.navbar-inverse(role="navigation")
       .container-fluid
         .navbar-header
-              each item in navitems
-                  <span> | </span>
-                  a(class=title==item.content?'active':undefined href=item.link)
-                    =item.content
-                    
+          each item in navitems
+            <span> | </span>
+            a(class=title==item.content?'active':undefined href=item.link)
+              =item.content
+
       div.page-header
       h1
   block content
