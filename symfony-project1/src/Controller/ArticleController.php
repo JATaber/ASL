@@ -18,4 +18,9 @@ class ArticleController{
         return new Response('TEST: Homepage');
     }
 
+    public function nextpage(){
+
+        return new Response('TEST: second page!!!');
+    }
+
 }

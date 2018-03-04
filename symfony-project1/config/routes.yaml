@@ -1,3 +1,7 @@
 index:
    path: /
    controller: App\Controller\ArticleController::homepage
+
+second:
+  path: /second
+  controller: App\Controller\ArticleController::nextpage
