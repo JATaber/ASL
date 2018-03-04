@@ -5,3 +5,7 @@ index:
 second:
   path: /second
   controller: App\Controller\ArticleController::nextpage
+
+lucky_number:
+    path: /number
+    controller: App\Controller\ArticleController::number

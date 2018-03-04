@@ -10,17 +10,35 @@ namespace App\Controller;
 
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ArticleController{
+class ArticleController extends Controller{
 
     public function homepage(){
 
-        return new Response('TEST: Homepage');
+        $menu = array('Home' => '/', 'Second' => '/second');
+
+        //return new Response('TEST: Homepage');
+
+        return $this->render('home.html.twig', array('nav' => $menu));
     }
 
     public function nextpage(){
 
-        return new Response('TEST: second page!!!');
+        //return new Response('TEST: second page!!!');
+        return $this->render('second.html.twig');
+    }
+
+    public function number(){
+        $number = mt_rand(0,100);
+
+        return $this->render('lucky/number.html.twig', array('number' => $number, ));
+
+        //return new Response('<html><body>Lucky number: '.$number.'</body></html>');
+    }
+
+    public function menu(){
+        $menu = Navi;
     }
 
 }
