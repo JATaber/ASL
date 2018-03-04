@@ -9,18 +9,16 @@
 namespace App\Controller;
 
 
-use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ArticleController extends Controller{
 
     public function homepage(){
 
-        $menu = array('Home' => '/', 'Second' => '/second');
-
         //return new Response('TEST: Homepage');
 
-        return $this->render('home.html.twig', array('nav' => $menu));
+        return $this->render('home.html.twig');
     }
 
     public function nextpage(){
@@ -35,10 +33,6 @@ class ArticleController extends Controller{
         return $this->render('lucky/number.html.twig', array('number' => $number, ));
 
         //return new Response('<html><body>Lucky number: '.$number.'</body></html>');
-    }
-
-    public function menu(){
-        $menu = Navi;
     }
 
 }
