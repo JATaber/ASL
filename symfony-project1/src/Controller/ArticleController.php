@@ -11,22 +11,34 @@ namespace App\Controller;
 
 //use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+
 
 class ArticleController extends Controller{
 
+    /**
+     * @Route("/", name="index")
+     */
     public function homepage(){
 
         //return new Response('TEST: Homepage');
 
+
         return $this->render('home.html.twig');
     }
 
+    /**
+     * @Route("/second", name="second")
+     */
     public function nextpage(){
 
         //return new Response('TEST: second page!!!');
         return $this->render('second.html.twig');
     }
 
+    /**
+     * @Route("/number", name="lucky_number")
+     */
     public function number(){
         $number = mt_rand(0,100);
 
