@@ -4,8 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var expressValidator = require('express-validator');
+const expressValidator = require('express-validator');
 var expressSession = require('express-session')
+const { check, validationResult } = require('express-validator/check');
 
 var index = require('./routes/index');
 var users = require('./routes/users');

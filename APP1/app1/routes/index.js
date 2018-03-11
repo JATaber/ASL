@@ -39,14 +39,16 @@ router.post('/submit', function(req, res, next){
   req.check('email', 'Invalid email address').isEmail();
   req.check('password', 'Please enter a valid password').isLength({min: 4});
 
-  var errors = req.getValidationResult();
-  console.log(errors);
+  const errors = req.validationErrors();
+  //console.log(res.json({ errors: errors }));
   if(errors){
     req.session.errors = errors;
     req.session.success = false;
+    //res.json({errors: errors});
   }else{
     req.session.success = false;
   }
+
   res.redirect('/form');
 
 });

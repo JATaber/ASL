@@ -9,7 +9,7 @@ block content
         if errors
           ul.list-group
             each error in errors
-              li.list-group-item.list-group-item-danger error.msg
+              li.list-group-item.list-group-item-danger=error.msg
         form(action='/submit' method='post')
           h1 Registration Form
           .form-group
