@@ -4,15 +4,20 @@ html
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='/bootstrap/js/jquery.min.js')
+    script(src='/bootstrap/js/tether.min.js')
     script(src='/bootstrap/js/bootstrap.min.js')
   body
-      nav.navbar.navbar-inverse(role="navigation")
-      .container-fluid
-        .navbar-header
-          each item in navitems
-            <span> | </span>
-            a(class=title==item.content?'active':undefined href=item.link)
-              =item.content
+      nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse(role="navigation")
+        .container
+          button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbar', aria-controls='navbar', aria-expanded='false', aria-label="toggle navigation")
+            span.navbar-toggler-icon
+          a.navbar-brand(href=navBrand.link) navbrand.content
+          #navbar.collapse.navbar-collapse
+            ul.navbar-nav.mr-auto
+              each item in navitems
+                li
+                  a(class=title==item.content?'active':undefined href=item.link)
+                    =item.content
 
       div.page-header
       h1
