@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
                 {link: '/users', content: 'Users'},
                 {link: '/form', content: 'Form'}
               ]});
+    req.session.destroy();
 });
 
 router.get('/users', function(req, res, next) {
@@ -19,6 +20,7 @@ router.get('/users', function(req, res, next) {
               {link: '/users', content: 'Users'},
               {link: '/form', content: 'Form'}
               ]});
+    req.session.destroy();
 });
 
 router.get('/form', function(req, res, next){
@@ -31,13 +33,14 @@ router.get('/form', function(req, res, next){
             {link: '/form', content: 'Form'}
             ]});
   req.session.errors = null;
-  //req.session.success = null;
+  req.session.destroy();
+
 });
 
 router.post('/submit', function(req, res, next){
-  req.check('name', 'Please enter a valid name').exists();
+  req.check('name', 'Please enter a valid name').notEmpty().isLength({min:2});
   req.check('email', 'Invalid email address').isEmail();
-  req.check('password', 'Please enter a valid password').isLength({min: 4});
+  req.check('password', 'Please enter a valid password').isLength({min: 3});
 
   const errors = req.validationErrors();
   //console.log(res.json({ errors: errors }));
@@ -46,10 +49,11 @@ router.post('/submit', function(req, res, next){
     req.session.success = false;
     //res.json({errors: errors});
   }else{
-    req.session.success = false;
+    req.session.success = true;
   }
 
   res.redirect('/form');
+  //req.session.destroy(success);
 
 });
 
