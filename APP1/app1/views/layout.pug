@@ -9,14 +9,14 @@ html
   body
       nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse(role="navigation")
         .container
+          a.navbar-brand(href='/') Home
           button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbar', aria-controls='navbar', aria-expanded='false', aria-label="toggle navigation")
             span.navbar-toggler-icon
-          a.navbar-brand(href=navBrand.link) navbrand.content
           #navbar.collapse.navbar-collapse
             ul.navbar-nav.mr-auto
               each item in navitems
-                li
-                  a(class=title==item.content?'active':undefined href=item.link)
+                li.nav-item.mr-auto
+                  a.nav-link(class=title==item.content?'active':undefined href=item.link)
                     =item.content
 
       div.page-header
