@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
-//var expressSession = require('express-session')
+var expressSession = require('express-session')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -24,8 +24,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(validator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressValidator(middlewareOptions));
-//app.use(expressSession({secret: 'james', saveUninitialized: false, resave: false}));
+app.use(expressValidator());
+app.use(expressSession({secret: 'james', saveUninitialized: false, resave: false}));
 
 app.use((req, res, next) => {
     res.locals.navitems = [

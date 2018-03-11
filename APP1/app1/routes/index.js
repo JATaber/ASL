@@ -24,23 +24,31 @@ router.get('/users', function(req, res, next) {
 router.get('/form', function(req, res, next){
   res.render('form', {
             title: 'Form',
-            success: false,
+            success: req.session.success,
             errors: req.session.errors,
             navitems: [
             {link: '/users', content: 'Users'},
             {link: '/form', content: 'Form'}
             ]});
   req.session.errors = null;
+  //req.session.success = null;
 });
 
 router.post('/submit', function(req, res, next){
+  req.check('name', 'Please enter a valid name').exists();
   req.check('email', 'Invalid email address').isEmail();
-  req.check('password', 'Please enter a valid password').isLength({min: 2}).equals(req.body.confirmPassword);
+  req.check('password', 'Please enter a valid password').isLength({min: 4});
 
-  var errors = req.validatonErrors();
+  var errors = req.getValidationResult();
+  console.log(errors);
   if(errors){
-
+    req.session.errors = errors;
+    req.session.success = false;
+  }else{
+    req.session.success = false;
   }
+  res.redirect('/form');
+
 });
 
 module.exports = router;
