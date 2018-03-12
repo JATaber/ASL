@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
                 {link: '/users', content: 'Users'},
                 {link: '/form', content: 'Form'}
               ]});
-    req.session.destroy();
+    //req.session= {};
 });
 
 router.get('/users', function(req, res, next) {
@@ -20,7 +20,7 @@ router.get('/users', function(req, res, next) {
               {link: '/users', content: 'Users'},
               {link: '/form', content: 'Form'}
               ]});
-    req.session.destroy();
+    //req.session = {};
 });
 
 router.get('/form', function(req, res, next){
@@ -33,8 +33,18 @@ router.get('/form', function(req, res, next){
             {link: '/form', content: 'Form'}
             ]});
   req.session.errors = null;
-  req.session.destroy();
+  req.session.success = null;
 
+});
+
+router.get('/formFeedback', function(req, res, next) {
+    res.render('formFeedback', {
+              title: 'Form',
+              navitems: [
+                {link: '/users', content: 'Users'},
+                {link: '/form', content: 'Form'}
+              ]});
+    //req.session = {};
 });
 
 router.post('/submit', function(req, res, next){
@@ -47,12 +57,13 @@ router.post('/submit', function(req, res, next){
   if(errors){
     req.session.errors = errors;
     req.session.success = false;
-    //res.json({errors: errors});
+    res.send({errors: errors});
+    //res.send(req.session.success);
   }else{
     req.session.success = true;
   }
 
-  res.redirect('/form');
+  res.redirect('/formFeedback');
   //req.session.destroy(success);
 
 });
