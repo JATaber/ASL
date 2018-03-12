@@ -48,6 +48,7 @@ router.get('/formFeedback', function(req, res, next) {
 });
 
 router.post('/submit', function(req, res, next){
+  req.checkBody('name', 'Please enter a valid name').isLength({min:2});
   req.checkBody('email', 'Invalid email address').isEmail();
   req.checkBody('password', 'Please enter a valid password').isLength({min: 3});
 
