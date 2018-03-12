@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
                 {link: '/users', content: 'Users'},
                 {link: '/form', content: 'Form'}
               ]});
-    //req.session= {};
+    req.session.destroy();
 });
 
 router.get('/users', function(req, res, next) {
@@ -20,7 +20,7 @@ router.get('/users', function(req, res, next) {
               {link: '/users', content: 'Users'},
               {link: '/form', content: 'Form'}
               ]});
-    //req.session = {};
+    req.session.destroy();
 });
 
 router.get('/form', function(req, res, next){
@@ -48,23 +48,22 @@ router.get('/formFeedback', function(req, res, next) {
 });
 
 router.post('/submit', function(req, res, next){
-  req.check('name', 'Please enter a valid name').notEmpty().isLength({min:2});
-  req.check('email', 'Invalid email address').isEmail();
-  req.check('password', 'Please enter a valid password').isLength({min: 3});
+  req.checkBody('email', 'Invalid email address').isEmail();
+  req.checkBody('password', 'Please enter a valid password').isLength({min: 3});
 
   const errors = req.validationErrors();
   //console.log(res.json({ errors: errors }));
   if(errors){
     req.session.errors = errors;
     req.session.success = false;
-    res.send({errors: errors});
-    //res.send(req.session.success);
+    //res.json({errors: errors});
+
   }else{
     req.session.success = true;
   }
 
-  res.redirect('/formFeedback');
-  //req.session.destroy(success);
+  res.redirect('/form');
+  //req.session.destroy();
 
 });
 
