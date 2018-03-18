@@ -7,11 +7,24 @@ var Sequelize = require('sequelize');
 const sequelize = new Sequelize('product', 'root', 'root',{
   host:'localhost',
   dialect: 'mysql',
-  port: 8889
+  port: 8889,
+  define:{
+    timestamps: false
+  }
 })
 
-const Produce = sequelize.define('produce',{
-  'name':{type:Sequelize.STRING}
+const Produce = sequelize.define(
+  'produce',{
+            'id':{
+              type:Sequelize.INTEGER,
+              primaryKey: true,
+              },
+              'name':{
+                type:Sequelize.STRING
+              }
+          },
+          {
+          tableName: 'produce'
 })
 
 /* GET home page. */
@@ -56,20 +69,7 @@ router.get('/product', function(req, res, next){
 
 });
 
-/*
-prodObj.getAll(function(produce){
 
-      res.render('product', {
-                title: 'Produce',
-                product: produce,
-                navitems: [
-                  {link: '/users', content: 'Users'},
-                  {link: '/form', content: 'Form'},
-                  {link:'/product', content:'Product'}
-                ]});
-      req.session.destroy();
-      //res.send(produce);
-    })*/
 
 router.get('/add', function(req, res, next) {
     res.render('add', {
@@ -122,22 +122,25 @@ router.get('/formFeedback', function(req, res, next) {
 });
 
 router.post('/addProduce', function(req, res, next){
-  req.checkBody('name', 'Please enter a valid name').isLength({min:2});
-  req.checkBody('email', 'Invalid email address').isEmail();
-  req.checkBody('password', 'Please enter a valid password').isLength({min: 3});
+  var name = req.body.name
 
-  const errors = req.validationErrors();
-  //console.log(res.json({ errors: errors }));
-  if(errors){
-    req.session.errors = errors;
-    req.session.success = false;
-    //res.json({errors: errors});
+  var produce = Produce.create({
+    name: req.body.name
+  });
 
-  }else{
-    req.session.success = true;
-  }
+  res.redirect('/product');
+  //req.session.destroy();
 
-  res.redirect('/form');
+});
+
+router.post('/delete', function(req, res, next){
+  var name = req.body.name
+
+  var produce = Produce.create({
+    name: req.body.name
+  });
+
+  res.redirect('/product');
   //req.session.destroy();
 
 });
