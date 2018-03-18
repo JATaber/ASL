@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+var expressSession = require('express-session')
+const { check, validationResult } = require('express-validator/check');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -19,8 +22,11 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(validator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressValidator());
+app.use(expressSession({secret: 'james', saveUninitialized: false, resave: false}));
 
 app.use((req, res, next) => {
     res.locals.navitems = [
