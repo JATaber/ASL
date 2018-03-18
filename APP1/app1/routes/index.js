@@ -83,7 +83,9 @@ router.get('/add', function(req, res, next) {
     req.session.destroy();
 });
 
-router.get('/update', function(req, res, next){
+router.get('/update/:id', function(req, res, next){
+  var id = req.params.id
+  
   res.render('update', {
             title: 'Produce',
             users:[{"Name":"James", "Lastname":"Taber"}],
@@ -133,8 +135,26 @@ router.post('/addProduce', function(req, res, next){
 
 });
 
-router.post('/delete', function(req, res, next){
+router.get('/delete/:id', function(req, res, next){
 
+  var prodId = req.params.id;
+  //console.log(prodId);
+
+  var produce = Produce.destroy({
+                          where: {
+                            id: prodId
+                          }
+  });
+  /*
+  var produce = Produce.find({where:
+                  {id: req.params.id}
+                }).then(){
+
+                    })
+                  }
+                  //console.log(data);
+                });
+                */
 
   res.redirect('/product');
   //req.session.destroy();
@@ -142,9 +162,9 @@ router.post('/delete', function(req, res, next){
 });
 
 router.post('/updateProduce', function(req, res, next){
-  
 
-  res.redirect('/form');
+
+  res.redirect('/product');
   //req.session.destroy();
 
 });

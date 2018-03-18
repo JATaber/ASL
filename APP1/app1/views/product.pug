@@ -8,4 +8,4 @@ block content
       ul
         each item in product
           li
-            p(name=item['id']) #{item["name"]} #[a(href='/update') Update] || #[a(href='/delete') Delete]
+            p #{item["name"]} #[a(href='/update/'+item['id']) Update] || #[a(href='/delete/'+item['id']) Delete]
