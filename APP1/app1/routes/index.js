@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+Produce = require('../models/produce.js');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', {
@@ -22,6 +24,26 @@ router.get('/users', function(req, res, next) {
               ]});
     req.session.destroy();
 });
+
+router.get('/product', function(req, res, next){
+
+  var prodObj = new Produce({}, req);
+
+  prodObj.getAll(function(product){
+
+        res.render('produce' {
+                  title: 'Procuce',
+                  product:produce,
+                  navitems: [
+                    {link: '/users', content: 'Users'},
+                    {link: '/form', content: 'Form'}
+                  ]});
+        req.session.destroy();
+        })
+    });
+});
+
+
 
 router.get('/form', function(req, res, next){
   res.render('form', {

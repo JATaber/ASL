@@ -13,6 +13,19 @@ var users = require('./routes/users');
 
 var app = express();
 
+var connection = require('express-myconnection');
+var mysql = require('mysql');
+
+app.use(
+  connection(mysql, {
+    host:'localhost',
+    user:'root',
+    password:'root',
+    port:'8889',
+    database:'product'
+  }, 'request')
+);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
