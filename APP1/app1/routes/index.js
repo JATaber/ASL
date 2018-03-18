@@ -84,18 +84,21 @@ router.get('/add', function(req, res, next) {
 });
 
 router.get('/update/:id', function(req, res, next){
-  var id = req.params.id
-  
-  res.render('update', {
-            title: 'Produce',
-            users:[{"Name":"James", "Lastname":"Taber"}],
-            navitems: [
-              {link: '/users', content: 'Users'},
-              {link: '/form', content: 'Form'},
-              {link:'/product', content:'Product'}
-            ]});
-    req.session.destroy();
-})
+  var prodId = req.params.id
+
+  var produce = Produce.findById(prodId).then(produce=>{
+    res.render('update', {
+              title: 'Produce',
+              produce:produce,
+              navitems: [
+                {link: '/users', content: 'Users'},
+                {link: '/form', content: 'Form'},
+                {link:'/product', content:'Product'}
+              ]});
+              console.dir(produce['name']);
+      req.session.destroy();
+  });
+});
 
 router.get('/form', function(req, res, next){
   res.render('form', {
@@ -124,7 +127,7 @@ router.get('/formFeedback', function(req, res, next) {
 });
 
 router.post('/addProduce', function(req, res, next){
-  var name = req.body.name
+  var name = req.body.name;
 
   var produce = Produce.create({
     name: req.body.name
@@ -161,8 +164,14 @@ router.get('/delete/:id', function(req, res, next){
 
 });
 
-router.post('/updateProduce', function(req, res, next){
+router.post('/updateProduce/:id', function(req, res, next){
+  var name = req.body.name;
+  var id = req.params.id;
+  var updateVal = { name: name };
 
+var prodce = Produce.update(updateVal, { where: { id: id } }).then((result)=>{
+  console.log(result);
+});
 
   res.redirect('/product');
   //req.session.destroy();
