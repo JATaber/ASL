@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
               title: 'Home',
               navitems: [
                 {link: '/users', content: 'Users'},
-                {link: '/form', content: 'Form'}
+                {link: '/form', content: 'Form'},
+                {link:'/product', content:'Product'}
               ]});
     req.session.destroy();
 });
@@ -19,8 +20,9 @@ router.get('/users', function(req, res, next) {
               title: 'Users',
               users:[{"Name":"James", "Lastname":"Taber"}],
               navitems: [
-              {link: '/users', content: 'Users'},
-              {link: '/form', content: 'Form'}
+                {link: '/users', content: 'Users'},
+                {link: '/form', content: 'Form'},
+                {link:'/product', content:'Product'}
               ]});
     req.session.destroy();
 });
@@ -29,21 +31,19 @@ router.get('/product', function(req, res, next){
 
   var prodObj = new Produce({}, req);
 
-  prodObj.getAll(function(product){
+  prodObj.getAll(function(produce){
 
-        res.render('produce' {
-                  title: 'Procuce',
-                  product:produce,
+        res.render('product', {
+                  title: 'Produce',
+                  product: produce,
                   navitems: [
                     {link: '/users', content: 'Users'},
-                    {link: '/form', content: 'Form'}
+                    {link: '/form', content: 'Form'},
+                    {link:'/product', content:'Product'}
                   ]});
         req.session.destroy();
         })
     });
-});
-
-
 
 router.get('/form', function(req, res, next){
   res.render('form', {
@@ -51,8 +51,9 @@ router.get('/form', function(req, res, next){
             success: req.session.success,
             errors: req.session.errors,
             navitems: [
-            {link: '/users', content: 'Users'},
-            {link: '/form', content: 'Form'}
+              {link: '/users', content: 'Users'},
+              {link: '/form', content: 'Form'},
+              {link:'/product', content:'Product'}
             ]});
   req.session.errors = null;
   req.session.success = null;
@@ -64,7 +65,8 @@ router.get('/formFeedback', function(req, res, next) {
               title: 'Form',
               navitems: [
                 {link: '/users', content: 'Users'},
-                {link: '/form', content: 'Form'}
+                {link: '/form', content: 'Form'},
+                {link:'/product', content:'Product'}
               ]});
     //req.session = {};
 });
