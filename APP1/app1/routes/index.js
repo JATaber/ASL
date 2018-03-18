@@ -134,11 +134,7 @@ router.post('/addProduce', function(req, res, next){
 });
 
 router.post('/delete', function(req, res, next){
-  var name = req.body.name
 
-  var produce = Produce.create({
-    name: req.body.name
-  });
 
   res.redirect('/product');
   //req.session.destroy();
@@ -146,20 +142,7 @@ router.post('/delete', function(req, res, next){
 });
 
 router.post('/updateProduce', function(req, res, next){
-  req.checkBody('name', 'Please enter a valid name').isLength({min:2});
-  req.checkBody('email', 'Invalid email address').isEmail();
-  req.checkBody('password', 'Please enter a valid password').isLength({min: 3});
-
-  const errors = req.validationErrors();
-  //console.log(res.json({ errors: errors }));
-  if(errors){
-    req.session.errors = errors;
-    req.session.success = false;
-    //res.json({errors: errors});
-
-  }else{
-    req.session.success = true;
-  }
+  
 
   res.redirect('/form');
   //req.session.destroy();
