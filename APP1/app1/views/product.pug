@@ -3,4 +3,9 @@ block content
   div.top
   div.container
     div.jumbotron
-      <p>This is the Home Page</p>
+      h1 Fruit and Vegetable List
+      p #[a(href='/add') New Entry]
+      ul
+        each item in product
+          li
+            p #{item["name"]} #[a(href='/update') Update] || #[a(href='') Delete]

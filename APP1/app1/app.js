@@ -16,6 +16,7 @@ var app = express();
 var connection = require('express-myconnection');
 var mysql = require('mysql');
 
+/*
 app.use(
   connection(mysql, {
     host:'localhost',
@@ -24,7 +25,7 @@ app.use(
     port:'8889',
     database:'product'
   }, 'request')
-);
+);*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

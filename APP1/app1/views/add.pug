@@ -1,0 +1,10 @@
+extend layout
+block content
+  .container
+    .jumbotron
+        form(action='/addProduce' method='post')
+          h1 Add Produce
+          .form-group
+            label(for='name') Name
+            input#name.form-control(type='text', name='name', placeholder='Enter Name')
+          button.btn.btn-primary(type='submit') Sign up

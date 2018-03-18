@@ -12,10 +12,15 @@ Produce.prototype.getAll = function(callback){
 
     var query = connection.query("select * from produce", function(err, rows){
 
-//console.log(rows[0]);
+      //console.log(rows[0].name);
+
       callback(rows);
-    })
-  })
+    });
+  });
+}
+
+Produce.prototype.deleteItem = function(){
+  
 }
 
 module.exports = Produce;
