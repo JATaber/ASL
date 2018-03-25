@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Login;
 use Symfony\Component\HttpFoundation\Response;
 //use Doctrine\DBAL\Types\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -103,6 +104,22 @@ class ArticleController extends Controller{
         $form->handleRequest($request);
 
         return $this->render('login.html.twig', array('title'=>'Login', "form"=>$form->createView()));
+    }
+
+    /**
+     * @Route("/register/save")
+     */
+    public function save(){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $login = new Login();
+
+        $login->setEmail();
+        $login->setPassword();
+
+        $entityManager->persist($login);
+
+        $entityManager->flush();
     }
 
 }
