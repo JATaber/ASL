@@ -1,0 +1,15 @@
+{%  extends 'navigation.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="jumbotron">
+            {#{{ dump(results.items) }}#}
+            <h2> FullSail YouTube Content</h2>
+            <ul>
+            {% for item in results.items %}
+                <li>Title: {{ item.snippet.title }} || Video Id: {{ item.snippet.channelId }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

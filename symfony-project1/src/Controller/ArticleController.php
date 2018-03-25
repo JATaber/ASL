@@ -85,25 +85,21 @@ class ArticleController extends Controller{
     }
 
     /**
-     * @Route("/login", name="login")
+     * @Route("/api", name="api")
      */
-    public function login(Request $request){
+    public function api(Request $request){
 
-        $form = $this->createFormBuilder(null)
-            ->setAction($this->generateUrl("registration"))
-            ->add("name", TextType::class, array("required"=>true, "constraints"=>[
-                new NotBlank(array("message"=>"Can not be blank"))
-            ]))
-            ->add("email", TextType::class, array("required"=>true, "constraints"=>[
-                new EmailConstraint(array("message"=>"This is not a correct email")),
-                new NotBlank(array("message"=>"Can not be blank"))
-            ]))
-            ->add("Register", SubmitType::class)
-            ->getForm();
+        $client = new \Google_Client();
+        $client->setDeveloperKey('AIzaSyB-Ba4JeMvZaKBHKa2Ooo3TFJ17bmCANyY');
 
-        $form->handleRequest($request);
+        $youtube = new \Google_Service_YouTube($client);
+        $optParams = array("q"=>'fullsail', "maxResults"=>12);
 
-        return $this->render('login.html.twig', array('title'=>'Login', "form"=>$form->createView()));
+        $searchResponse = $youtube->search->listSearch('id,snippet', $optParams);
+
+
+
+        return $this->render('api.html.twig', array('title'=>'Login', 'results'=>$searchResponse));
     }
 
     /**
