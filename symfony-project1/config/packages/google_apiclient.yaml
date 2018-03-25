@@ -2,6 +2,6 @@ services:
     Google_Client:
         class: Google_Client
         calls:
-            - [setDeveloperKey, ['%env(AIzaSyB-Ba4JeMvZaKBHKa2Ooo3TFJ17bmCANyY)%']]
-            - [setClientId, ['%env(501462870335-7o4pi1sr4oerfa2ilmi4rulsqcc6hrs4.apps.googleusercontent.com)%']]
-            - [setClientSecret, ['%env(1EvM2A14gWXR1Y51N5kJ8wR2)%']]
+            - [setDeveloperKey, ['%env(GOOGLE_API_KEY)%']]
+            - [setClientId, ['%env(GOOGLE_CLIENT_ID)%']]
+            - [setClientSecret, ['%env(GOOGLE_CLIENT_SECRET)%']]
