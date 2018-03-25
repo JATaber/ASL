@@ -83,4 +83,26 @@ class ArticleController extends Controller{
         return $this->render('registration.html.twig', array('title'=>'Register', "form"=>$form->createView()));
     }
 
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(Request $request){
+
+        $form = $this->createFormBuilder(null)
+            ->setAction($this->generateUrl("registration"))
+            ->add("name", TextType::class, array("required"=>true, "constraints"=>[
+                new NotBlank(array("message"=>"Can not be blank"))
+            ]))
+            ->add("email", TextType::class, array("required"=>true, "constraints"=>[
+                new EmailConstraint(array("message"=>"This is not a correct email")),
+                new NotBlank(array("message"=>"Can not be blank"))
+            ]))
+            ->add("Register", SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        return $this->render('login.html.twig', array('title'=>'Login', "form"=>$form->createView()));
+    }
+
 }
