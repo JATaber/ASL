@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Login;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -12,17 +13,26 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Login[]    findAll()
  * @method Login[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LoginRepository extends ServiceEntityRepository
+class LoginRepository extends ServiceEntityRepository implements UserLoaderInterface
 {
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Login::class);
     }
 
-//    /**
-//     * @return Login[] Returns an array of Login objects
-//     */
-    /*
+    public function loadUserByUsername($username)
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.username = :username OR l.email = :email')
+            ->setParameter('email', $username)
+            ->setParameter('username', $username)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @return Login[] Returns an array of Login objects
+     */
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('l')
@@ -34,9 +44,9 @@ class LoginRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
 
-    /*
+
+
     public function findOneBySomeField($value): ?Login
     {
         return $this->createQueryBuilder('l')
@@ -46,5 +56,5 @@ class LoginRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }
