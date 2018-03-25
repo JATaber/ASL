@@ -15,6 +15,9 @@
                     <li class="nav-item {% if app.request.attributes.get('_route') == 'lucky_number' %}active{% endif %}">
                         <a class="nav-link" href="{{ path('lucky_number') }}">Lucky Number!</a>
                     </li>
+                    <li class="nav-item {% if app.request.attributes.get('_route') == 'registration' %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('registration') }}">Registration</a>
+                    </li>
                 </ul>
             </div>
         </div>
